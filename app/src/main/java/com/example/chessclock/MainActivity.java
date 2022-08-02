@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private CountDownTimer mCountDownTimer;
+    private CountDownTimer mCountDownTimer,mCountDownTimerBottom;
 
     private boolean mTimerRunning;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 if (mTimerRunning) {
                     pauseTimer();
                 } else {
-                    startTimer();
+                    startTimerTopClock();
                 }
             }
         });
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         btm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 btmtimer.setText("00:01");
             }
         });
@@ -71,9 +72,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playTimer();
+            }
+        });
+
     }
 
-    private void startTimer() {
+    private void startTimerBottomclock() {
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+                mTimerRunning = false;
+                Pause.setVisibility(View.INVISIBLE);
+                Reset.setVisibility(View.VISIBLE);
+            }
+        }.start();
+
+        mTimerRunning = true;
+        Reset.setVisibility(View.INVISIBLE);
+    }
+
+    private void startTimerTopClock() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -102,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void playTimer() {
-        startTimer();
-        Play.setVisibility(View.INVISIBLE);
+        startTimerTopClock();
+        Play.setVisibility(View.GONE);
         Pause.setVisibility(View.VISIBLE);
     }
 
@@ -111,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
         updateCountDownText();
         Reset.setVisibility(View.INVISIBLE);
+        Pause.setVisibility(View.VISIBLE);
     }
 
     private void updateCountDownText() {
