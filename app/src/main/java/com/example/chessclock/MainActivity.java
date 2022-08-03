@@ -65,21 +65,21 @@ public class MainActivity extends AppCompatActivity {
         Reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // resetTimer();
+                resetTimer();
             }
         });
 
         Pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pauseTimer();
+                pauseBothclock();
             }
         });
 
         Play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //playTimer();
+                playTimer();
             }
         });
 
@@ -96,13 +96,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mBTimerRunning = false;
-                Pause.setVisibility(View.INVISIBLE);
-                Reset.setVisibility(View.VISIBLE);
             }
         }.start();
 
        mBTimerRunning = true;
         Reset.setVisibility(View.INVISIBLE);
+        Pause.setVisibility(View.VISIBLE);
     }
 
     private void updateCountDownBottomText() {
@@ -117,9 +116,6 @@ public class MainActivity extends AppCompatActivity {
     private void pauseTimerBottom() {
         mCountDownTimerBottom.cancel();
         mBTimerRunning = false;
-        Pause.setVisibility(View.GONE);
-        Play.setVisibility(View.VISIBLE);
-        Reset.setVisibility(View.VISIBLE);
     }
 
     // Top CLock functions
@@ -135,25 +131,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-                Pause.setVisibility(View.INVISIBLE);
-                Reset.setVisibility(View.VISIBLE);
             }
         }.start();
 
         mTimerRunning = true;
         Reset.setVisibility(View.INVISIBLE);
+        Pause.setVisibility(View.VISIBLE);
     }
 
     private void pauseTimer() {
         mCountDownTimerTop.cancel();
         mTimerRunning = false;
-        Pause.setVisibility(View.GONE);
-        Play.setVisibility(View.VISIBLE);
-        Reset.setVisibility(View.VISIBLE);
     }
 
     private void playTimer() {
-        startTimerTopClock();
         Play.setVisibility(View.GONE);
         Pause.setVisibility(View.VISIBLE);
     }
@@ -172,5 +163,15 @@ public class MainActivity extends AppCompatActivity {
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
         tptimer.setText(timeLeftFormatted);
+    }
+
+
+    private void pauseBothclock(){
+        mCountDownTimerTop.cancel();
+        mTimerRunning = false;
+        mCountDownTimerBottom.cancel();
+        mBTimerRunning = false;
+        Pause.setVisibility(View.GONE);
+        Play.setVisibility(View.VISIBLE);
     }
 }
