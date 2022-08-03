@@ -82,8 +82,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btmtimer"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
             android:text="00:00"
             android:layout_gravity="center"
             android:textAlignment="center"

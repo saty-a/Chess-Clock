@@ -19,11 +19,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private CountDownTimer mCountDownTimer,mCountDownTimerBottom;
+    private CountDownTimer mCountDownTimerTop,mCountDownTimerBottom;
 
-    private boolean mTimerRunning;
+    private boolean mTimerRunning,mBTimerRunning,switchClock=true;
 
-    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private long mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
+    private long mTimeLeftInMillisTBottom = START_TIME_IN_MILLIS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         tp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                startTimerBottomclock();
                 if (mTimerRunning) {
                     pauseTimer();
-                } else {
-                    startTimerTopClock();
                 }
             }
         });
@@ -54,14 +55,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                btmtimer.setText("00:01");
+                startTimerTopClock();
+                if (mBTimerRunning){
+                    pauseTimerBottom();
+                }
             }
         });
 
         Reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resetTimer();
+               // resetTimer();
             }
         });
 
@@ -75,37 +79,56 @@ public class MainActivity extends AppCompatActivity {
         Play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playTimer();
+                //playTimer();
             }
         });
 
     }
 
     private void startTimerBottomclock() {
-        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+        mCountDownTimerBottom = new CountDownTimer(mTimeLeftInMillisTBottom, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mTimeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
+                mTimeLeftInMillisTBottom = millisUntilFinished;
+                updateCountDownBottomText();
             }
 
             @Override
             public void onFinish() {
-                mTimerRunning = false;
+                mBTimerRunning = false;
                 Pause.setVisibility(View.INVISIBLE);
                 Reset.setVisibility(View.VISIBLE);
             }
         }.start();
 
-        mTimerRunning = true;
+       mBTimerRunning = true;
         Reset.setVisibility(View.INVISIBLE);
     }
 
+    private void updateCountDownBottomText() {
+        int minutes = (int) (mTimeLeftInMillisTBottom / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillisTBottom / 1000) % 60;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        btmtimer.setText(timeLeftFormatted);
+    }
+
+    private void pauseTimerBottom() {
+        mCountDownTimerBottom.cancel();
+        mBTimerRunning = false;
+        Pause.setVisibility(View.GONE);
+        Play.setVisibility(View.VISIBLE);
+        Reset.setVisibility(View.VISIBLE);
+    }
+
+    // Top CLock functions
+
     private void startTimerTopClock() {
-        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+        mCountDownTimerTop = new CountDownTimer(mTimeLeftInMillisTop, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mTimeLeftInMillis = millisUntilFinished;
+                mTimeLeftInMillisTop = millisUntilFinished;
                 updateCountDownText();
             }
 
@@ -122,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void pauseTimer() {
-        mCountDownTimer.cancel();
+        mCountDownTimerTop.cancel();
         mTimerRunning = false;
         Pause.setVisibility(View.GONE);
         Play.setVisibility(View.VISIBLE);
@@ -136,15 +159,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetTimer() {
-        mTimeLeftInMillis = START_TIME_IN_MILLIS;
+        mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
         updateCountDownText();
         Reset.setVisibility(View.INVISIBLE);
         Pause.setVisibility(View.VISIBLE);
     }
 
     private void updateCountDownText() {
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+        int minutes = (int) (mTimeLeftInMillisTop / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillisTop / 1000) % 60;
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
