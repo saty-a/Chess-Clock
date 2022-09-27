@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        app:cardBackgroundColor="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity = "center_vertical"
+            android:padding = "10dp"
+            android:weightSum = "1">
+
+<!--            <ImageView-->
+<!--                android:id="@+id/back"-->
+<!--                android:layout_width="25dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:clickable="true"-->
+<!--                android:src="@drawable/ic_left_arrow_icon"-->
+<!--                app:tint="@color/black" />-->
+
+
+            <TextView
+                android:id="@+id/hashtagNm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:text="Settings"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:buttonTint="#4CAF50"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                android:text="Fischer Blitz 5|0"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#4CAF50"
+                android:textSize="16sp"
+                android:text="Delay Bullet 1|2"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#4CAF50"
+                android:textSize="16sp"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                android:text="Fischer 5|5"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#4CAF50"
+                android:textSize="16sp"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                android:text="Fischer Rapid 10|5"/>
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:backgroundTint="#4CAF50"
+        android:text="Done"
+
+        />
+
+</LinearLayout>

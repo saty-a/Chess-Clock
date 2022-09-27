@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ll"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -23,6 +24,7 @@
             android:layout_gravity="center"
             android:textSize="100sp"
             />
+
     </LinearLayout>
 
     <LinearLayout
@@ -45,6 +47,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:id="@+id/settings"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:layout_marginStart="20dp"
