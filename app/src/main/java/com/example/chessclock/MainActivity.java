@@ -39,15 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Initializations
-        ll=findViewById(R.id.ll);
-        tp=findViewById(R.id.top);
-        btm=findViewById(R.id.bottom);
-        tptimer=findViewById(R.id.uptimer);
-        btmtimer=findViewById(R.id.btmtimer);
-        Reset=findViewById(R.id.reset);
-        Pause=findViewById(R.id.pause);
-        Play=findViewById(R.id.play);
-        Settings=findViewById(R.id.settings);
+        initUi();
+
 
         tp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +96,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void initUi() {
+        ll=findViewById(R.id.ll);
+        tp=findViewById(R.id.top);
+        btm=findViewById(R.id.bottom);
+        tptimer=findViewById(R.id.uptimer);
+        btmtimer=findViewById(R.id.btmtimer);
+        Reset=findViewById(R.id.reset);
+        Pause=findViewById(R.id.pause);
+        Play=findViewById(R.id.play);
+        Settings=findViewById(R.id.settings);
     }
 
     private void Vibrate() {

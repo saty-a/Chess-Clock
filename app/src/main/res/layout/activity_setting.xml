@@ -59,6 +59,7 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/fiveRd"
                 android:textSize="16sp"
                 android:buttonTint="#4CAF50"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
@@ -68,9 +69,10 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/oneMinRd"
                 android:buttonTint="#4CAF50"
                 android:textSize="16sp"
-                android:text="Delay Bullet 1|2"
+                android:text="Bullet 1|2"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                 />
 
@@ -78,6 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="#4CAF50"
+                android:id="@+id/fischerFive"
                 android:textSize="16sp"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                 android:text="Fischer 5|5"/>
@@ -85,6 +88,7 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tenRd"
                 android:buttonTint="#4CAF50"
                 android:textSize="16sp"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
@@ -105,6 +109,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/confirmBtn"
         android:layout_margin="10dp"
         android:padding="10dp"
         android:backgroundTint="#4CAF50"
