@@ -1,8 +1,10 @@
 package com.example.chessclock;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -20,13 +22,9 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     LinearLayout tp,btm,ll;
     TextView tptimer,btmtimer;
-    ImageView Reset,Pause,Play,Settings;
+    ImageView Reset,Pause,Settings;
     private static final long START_TIME_IN_MILLIS = 600000;
-
-
-
     private CountDownTimer mCountDownTimerTop,mCountDownTimerBottom;
-
     private boolean mTimerRunning,mBTimerRunning,switchClock=true;
     private long mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
     private long mTimeLeftInMillisTBottom = START_TIME_IN_MILLIS;
@@ -35,22 +33,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         //Initializations
         initUi();
-
 
         tp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 startTimerBottomclock();
+                showReset();
 
                 if (mTimerRunning) {
                     Vibrate();
                     pauseTimer();
+                }
+            }
+        });
+
+        btm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startTimerTopClock();
+                showReset();
+
+                if (mBTimerRunning){
+                    Vibrate();
+                    pauseTimerBottom();
                 }
             }
         });
@@ -60,18 +69,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i= new Intent(MainActivity.this,SettingActivity.class);
                 startActivity(i);
-            }
-        });
-
-        btm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startTimerTopClock();
-                if (mBTimerRunning){
-                    Vibrate();
-                    pauseTimerBottom();
-                }
             }
         });
 
@@ -88,14 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 pauseBothclock();
             }
         });
+        updateCountDownText();
+    }
 
-        Play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playTimer();
-            }
-        });
-
+    private void showReset() {
+        if (mTimerRunning || mBTimerRunning){
+            Reset.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initUi() {
@@ -106,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         btmtimer=findViewById(R.id.btmtimer);
         Reset=findViewById(R.id.reset);
         Pause=findViewById(R.id.pause);
-        Play=findViewById(R.id.play);
         Settings=findViewById(R.id.settings);
     }
 
@@ -176,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
         }.start();
 
         mTimerRunning = true;
-        Reset.setVisibility(View.INVISIBLE);
         Pause.setVisibility(View.VISIBLE);
     }
 
@@ -185,34 +179,55 @@ public class MainActivity extends AppCompatActivity {
         mTimerRunning = false;
     }
 
-    private void playTimer() {
-        Play.setVisibility(View.GONE);
-        Pause.setVisibility(View.VISIBLE);
-    }
-
     private void resetTimer() {
-        mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
-        updateCountDownText();
-        Reset.setVisibility(View.INVISIBLE);
-        Pause.setVisibility(View.VISIBLE);
+        if(mTimerRunning || mBTimerRunning){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            // Set the message show for the Alert time
+            builder.setMessage("Do you want to reset ?");
+            // Set Alert Title
+            builder.setTitle("Alert !");
+            // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+            builder.setCancelable(false);
+            // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+            builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                // When the user click yes button then app will close
+                mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
+                updateCountDownText();
+                Reset.setVisibility(View.INVISIBLE);
+            });
+
+            // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                // If user click no then dialog box is canceled.
+                dialog.cancel();
+            });
+
+            // Create the Alert dialog
+            AlertDialog alertDialog = builder.create();
+            // Show the Alert Dialog box
+            alertDialog.show();
+        }
     }
 
     private void updateCountDownText() {
         int minutes = (int) (mTimeLeftInMillisTop / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillisTop / 1000) % 60;
-
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-
         tptimer.setText(timeLeftFormatted);
     }
 
 
     private void pauseBothclock(){
-        mCountDownTimerTop.cancel();
-        mTimerRunning = false;
-        mCountDownTimerBottom.cancel();
-        mBTimerRunning = false;
-        Pause.setVisibility(View.GONE);
-        Play.setVisibility(View.VISIBLE);
+        if(mTimerRunning){
+            mCountDownTimerTop.cancel();
+            mTimerRunning = false;
+            Pause.setVisibility(View.INVISIBLE);
+        }
+        if(mBTimerRunning){
+            mCountDownTimerBottom.cancel();
+            mBTimerRunning = false;
+            Pause.setVisibility(View.INVISIBLE);
+        }
+
     }
 }

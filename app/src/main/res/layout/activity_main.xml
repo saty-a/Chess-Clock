@@ -39,6 +39,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:visibility="invisible"
             android:id="@+id/reset"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
@@ -56,21 +57,12 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:visibility="invisible"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:id="@+id/pause"
             android:layout_marginStart="20dp"
             android:src="@drawable/ic_pause"/>
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:visibility="gone"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:id="@+id/play"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/ic_play"/>
 
     </LinearLayout>
 

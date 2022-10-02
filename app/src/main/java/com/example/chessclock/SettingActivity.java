@@ -28,13 +28,13 @@ public class SettingActivity extends AppCompatActivity {
                     tm=new TimerModel(0,5000);
                 }else if (bullet.isChecked()){
                     Toast.makeText(SettingActivity.this, "Bullet is selected", Toast.LENGTH_SHORT).show();
-                    tm=new TimerModel(0,5000);
+                    tm=new TimerModel(1,1000);
                 }else if (rapid.isChecked()){
                     Toast.makeText(SettingActivity.this, "Rapid is selected", Toast.LENGTH_SHORT).show();
-                    tm=new TimerModel(0,5000);
+                    tm=new TimerModel(2,10000);
                 }else if (fischerfive.isChecked()){
                     Toast.makeText(SettingActivity.this, "Fischerfive is selected", Toast.LENGTH_SHORT).show();
-                    tm=new TimerModel(0,5000);
+                    tm=new TimerModel(3,5000);
                 }else {
                     Toast.makeText(SettingActivity.this, "Select any of the options", Toast.LENGTH_SHORT).show();
                 }
