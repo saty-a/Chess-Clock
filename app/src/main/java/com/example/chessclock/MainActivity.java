@@ -38,9 +38,14 @@ public class MainActivity extends AppCompatActivity {
         //Initializations
         initUi();
         Intent i=getIntent();
-        START_TIME_IN_MILLIS=i.getIntExtra("value",0);
-        updateCountDownText();
-        updateCountDownBottomText();
+        if (i.getIntExtra("value",0)!=0){
+            START_TIME_IN_MILLIS=i.getIntExtra("value",0);
+            mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
+            mTimeLeftInMillisTBottom=START_TIME_IN_MILLIS;
+            updateCountDownText();
+            updateCountDownBottomText();
+        }
+
 
 
 
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pauseBothclock();
                 Intent i= new Intent(MainActivity.this,SettingActivity.class);
                 startActivity(i);
             }
@@ -151,9 +157,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateCountDownBottomText() {
         int minutes = (int) (mTimeLeftInMillisTBottom / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillisTBottom / 1000) % 60;
-
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-
         btmtimer.setText(timeLeftFormatted);
     }
 
@@ -199,8 +203,11 @@ public class MainActivity extends AppCompatActivity {
             // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
             builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
                 // When the user click yes button then app will close
+                pauseBothclock();
                 mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
+                mTimeLeftInMillisTBottom=START_TIME_IN_MILLIS;
                 updateCountDownText();
+                updateCountDownBottomText();
                 Reset.setVisibility(View.INVISIBLE);
             });
 
