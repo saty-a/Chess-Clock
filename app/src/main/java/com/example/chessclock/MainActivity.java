@@ -23,11 +23,13 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout tp,btm,ll;
     TextView tptimer,btmtimer;
     ImageView Reset,Pause,Settings;
-    private static final long START_TIME_IN_MILLIS = 600000;
+    TimerModel tm;
+    private static long START_TIME_IN_MILLIS = 600000;
     private CountDownTimer mCountDownTimerTop,mCountDownTimerBottom;
     private boolean mTimerRunning,mBTimerRunning,switchClock=true;
     private long mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
     private long mTimeLeftInMillisTBottom = START_TIME_IN_MILLIS;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Initializations
         initUi();
+        Intent i=getIntent();
+        START_TIME_IN_MILLIS=i.getIntExtra("value",0);
+        updateCountDownText();
+        updateCountDownBottomText();
+
+
 
         tp.setOnClickListener(new View.OnClickListener() {
             @Override
