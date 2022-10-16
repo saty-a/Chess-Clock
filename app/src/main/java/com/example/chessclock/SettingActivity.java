@@ -9,15 +9,17 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 public class SettingActivity extends AppCompatActivity {
     RadioButton blitz,bullet,rapid,fischerfive;
     Button submit;
-    TimerModel tm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         initUI();
 
 

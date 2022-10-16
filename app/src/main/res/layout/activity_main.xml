@@ -13,17 +13,43 @@
         android:layout_height="wrap_content"
         android:id="@+id/top"
         android:layout_weight="1"
+        android:padding="5dp"
+        android:orientation="vertical"
         android:background="#4CAF50"
         >
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/uptimer"
-            android:text="10:00"
-            android:textAlignment="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moves"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/movesTp"
+                android:text="@string/_0"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_gravity="center"
-            android:textSize="100sp"
-            />
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/uptimer"
+                android:text="@string/_10_00"
+                android:gravity="center"
+                android:textSize="100sp"
+                />
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -71,17 +97,43 @@
         android:layout_height="wrap_content"
         android:id="@+id/bottom"
         android:background="#1D000000"
+        android:orientation="vertical"
+        android:padding="5dp"
         android:layout_weight="1">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btmtimer"
-            android:text="10:00"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textAlignment="center"
-            android:textSize="100sp"
-            />
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/btmtimer"
+                android:text="@string/_10_00"
+                android:gravity="center"
+                android:textSize="100sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moves"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_0"
+                android:id="@+id/movesBt"
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
 
 

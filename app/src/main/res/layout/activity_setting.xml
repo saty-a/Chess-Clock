@@ -36,8 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:text="Settings"
+                android:layout_marginStart="10dp"
+                android:text="@string/settings"
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -63,7 +63,7 @@
                 android:textSize="16sp"
                 android:buttonTint="#4CAF50"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-                android:text="Fischer Blitz 5|0"
+                android:text="@string/fischer_blitz_5_0"
                 />
 
             <RadioButton
@@ -72,7 +72,7 @@
                 android:id="@+id/oneMinRd"
                 android:buttonTint="#4CAF50"
                 android:textSize="16sp"
-                android:text="Bullet 1|2"
+                android:text="@string/bullet_1_2"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                 />
 
@@ -83,7 +83,7 @@
                 android:id="@+id/fischerFive"
                 android:textSize="16sp"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-                android:text="Fischer 5|5"/>
+                android:text="@string/fischer_5_5"/>
 
             <RadioButton
                 android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                 android:buttonTint="#4CAF50"
                 android:textSize="16sp"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-                android:text="Fischer Rapid 10|5"/>
+                android:text="@string/fischer_rapid_10_5"/>
 
         </RadioGroup>
 
@@ -101,7 +101,7 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         />
 
@@ -113,7 +113,7 @@
         android:layout_margin="10dp"
         android:padding="10dp"
         android:backgroundTint="#4CAF50"
-        android:text="Done"
+        android:text="@string/done"
 
         />
 

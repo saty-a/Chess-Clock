@@ -18,17 +18,19 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout tp,btm,ll;
-    TextView tptimer,btmtimer;
+    TextView tptimer,btmtimer,movestp,movesbt;
     ImageView Reset,Pause,Settings;
-    TimerModel tm;
     private static long START_TIME_IN_MILLIS = 600000;
     private CountDownTimer mCountDownTimerTop,mCountDownTimerBottom;
-    private boolean mTimerRunning,mBTimerRunning,switchClock=true;
+    private boolean mTimerRunning,mBTimerRunning;
     private long mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
     private long mTimeLeftInMillisTBottom = START_TIME_IN_MILLIS;
+    private  int bottomMoves=0;
+    private  int topMoves=0;
 
 
     @Override
@@ -55,11 +57,15 @@ public class MainActivity extends AppCompatActivity {
 
                 startTimerBottomclock();
                 showReset();
+                topMoves++;
+                movestp.setText(""+topMoves);
 
                 if (mTimerRunning) {
                     Vibrate();
                     pauseTimer();
                 }
+                btm.setEnabled(true);
+                tp.setEnabled(false);
             }
         });
 
@@ -69,11 +75,15 @@ public class MainActivity extends AppCompatActivity {
 
                 startTimerTopClock();
                 showReset();
+                bottomMoves++;
+                movesbt.setText(""+bottomMoves);
 
                 if (mBTimerRunning){
                     Vibrate();
                     pauseTimerBottom();
                 }
+                tp.setEnabled(true);
+                btm.setEnabled(false);
             }
         });
 
@@ -117,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         Reset=findViewById(R.id.reset);
         Pause=findViewById(R.id.pause);
         Settings=findViewById(R.id.settings);
+        movestp=findViewById(R.id.movesTp);
+        movesbt=findViewById(R.id.movesBt);
     }
 
     private void Vibrate() {
@@ -204,8 +216,11 @@ public class MainActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
                 // When the user click yes button then app will close
                 pauseBothclock();
-                mTimeLeftInMillisTop = START_TIME_IN_MILLIS;
-                mTimeLeftInMillisTBottom=START_TIME_IN_MILLIS;
+                btm.setEnabled(true);
+                tp.setEnabled(true);
+
+                mTimeLeftInMillisTop =START_TIME_IN_MILLIS;
+                mTimeLeftInMillisTBottom =START_TIME_IN_MILLIS;
                 updateCountDownText();
                 updateCountDownBottomText();
                 Reset.setVisibility(View.INVISIBLE);
@@ -238,11 +253,11 @@ public class MainActivity extends AppCompatActivity {
             mTimerRunning = false;
             Pause.setVisibility(View.INVISIBLE);
         }
+
         if(mBTimerRunning){
             mCountDownTimerBottom.cancel();
             mBTimerRunning = false;
             Pause.setVisibility(View.INVISIBLE);
         }
-
     }
 }
